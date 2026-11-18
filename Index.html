@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobSphere - Job Search & Application Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">Job<span>Sphere</span></div>
+        <ul>
+            <li><a href="#jobs">Find Jobs</a></li>
+            <li><a href="#applications">My Applications</a></li>
+            <li><a href="#profile">Applicant Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO & SEARCH CONTROLS -->
+    <section class="hero">
+        <h1>Find Your Next Opportunity</h1>
+        <p>Search opportunities matching your qualification, experience, and domain.</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search title or company...">
+            <select id="qualificationFilter">
+                <option value="">All Qualifications</option>
+                <option value="B.Tech / B.E">B.Tech / B.E</option>
+                <option value="B.Sc / BCA">B.Sc / BCA</option>
+                <option value="M.Tech / MCA">M.Tech / MCA</option>
+            </select>
+
+            <select id="experienceFilter">
+                <option value="">Any Experience</option>
+                <option value="0">Fresher (0 yrs)</option>
+                <option value="1">1+ Years</option>
+                <option value="3">3+ Years</option>
+            </select>
+
+            <button class="search-btn" onclick="triggerAsyncSearch()">Search</button>
+            <button class="api-btn" onclick="fetchExternalJobs()">Fetch External Jobs</button>
+        </div>
+    </section>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- STATUS / LOADING BANNER -->
+        <div id="statusMessage"></div>
+
+        <!-- CATEGORY FILTERS -->
+        <div class="section-title" id="jobs">
+            <div>
+                <h2>Available Job Opportunities</h2>
+                <p>Dynamically displayed and filtered using Array methods</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="filter active" onclick="setCategoryFilter('All', this)">All Jobs</button>
+            <button class="filter" onclick="setCategoryFilter('Full Time', this)">Full Time</button>
+            <button class="filter" onclick="setCategoryFilter('Internship', this)">Internship</button>
+            <button class="filter" onclick="setCategoryFilter('Remote', this)">Remote</button>
+        </div>
+
+        <!-- DYNAMIC JOB LISTINGS -->
+        <div class="jobs" id="jobContainer"></div>
+
+        <!-- APPLICATION TRACKER (FULL CRUD) -->
+        <section class="tracker" id="applications">
+            <div class="section-title">
+                <div>
+                    <h2>My Applications (CRUD & LocalStorage)</h2>
+                    <p>Track, update statuses, or withdraw your applications</p>
+                </div>
+            </div>
+            <div id="applicationList"></div>
+        </section>
+
+        <!-- APPLICANT PROFILE REGISTRATION & VALIDATION FORM -->
+        <section class="profile" id="profile">
+            <div class="section-title">
+                <div>
+                    <h2>Applicant Registration Form</h2>
+                    <p>Register applicant details with client-side validation</p>
+                </div>
+            </div>
+            <form id="applicantForm" onsubmit="event.preventDefault(); saveApplicant();">
+                <div class="profile-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="qualification">Highest Qualification *</label>
+                        <select id="qualification">
+                            <option value="">Select Qualification</option>
+                            <option value="B.Tech / B.E">B.Tech / B.E</option>
+                            <option value="B.Sc / BCA">B.Sc / BCA</option>
+                            <option value="M.Tech / MCA">M.Tech / MCA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experience (Years) *</label>
+                        <input type="number" id="experience" min="0" max="40" placeholder="0 for Fresher">
+                    </div>
+                </div>
+                <button type="submit" class="save-btn">Save Applicant Profile</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <h2>JobSphere</h2>
+        <p>Developed for Full Stack Development Session &bull; 5 Member Team Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
